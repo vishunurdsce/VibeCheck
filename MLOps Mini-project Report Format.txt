@@ -1,0 +1,306 @@
+VISVESVARAYA TECHNOLOGICAL UNIVERSITY
+JNANASANGAMA, BELAGAVI - 590018
+
+
+
+
+
+
+A Minor Project Report On
+Project Title…..
+
+Submitted in partial fulfillment for the AAT in MLOps (22AI61)
+In
+Artificial Intelligence and Machine Learning Department
+             Submitted by
+TEAM MEMBER1 (USN)
+
+Guide: Mr.Basudev Panda
+              Course Coordinator: Prof. Anupama V P
+
+
+
+
+DAYANANDA SAGAR COLLEGE OF ENGINEERING
+(An Autonomous Institute Affiliated to VTU, Belagavi.)
+Shavige Malleshwara Hills, Kumaraswamy Layout, Bengaluru-560111
+Department of Artificial Intelligence and Machine Learning
+
+Department of Artificial Intelligence and Machine Learning
+2025 – 2026
+ACKNOWLEDGEMENT
+
+The success and outcome of this project require the guidance and assistance of many people. We would like to add a few words of appreciation for the people who have been part of this project right from its inception, without their support patience and guidance the task would not have been completed. It is to them we owe them our deepest gratitude.
+
+ We are grateful to Dr. B G Prasad, Principal, Dayananda Sagar College of Engineering, for providing an opportunity to do this project as a part of our curriculum and for his kind cooperation for the project. 
+
+We are very much grateful to Dr. Vindhya P Malagi, Professor and HOD, Department of Artificial Intelligence and Machine Learning, Dayananda Sagar College of Engineering, Bangalore for providing the encouragement for completion of our project. 
+
+We would like to express our deep gratitude to our Project Guide, Mr.Basudev Panda. For his valuable guidance, patience, constant supervision and timely suggestions provided in making of this project and for his support throughout the completion. 
+
+We are also thankful to our parents and friends for their constant help and constructive suggestions throughout our project.
+
+
+
+
+
+
+
+
+
+(USN) TEAM MEMBER NAMES
+
+ABSTRACT
+
+An abstract is a brief summary of a project report, providing a comprehensive snapshot of the key elements of the study. The methodology used, the main findings or results, and the conclusions or implications of the work. The abstract is designed to give readers a quick and clear understanding of the project's scope and significance without having to read the entire report. It serves as a tool for readers to decide if the content of the report is relevant to their interests and worth further exploration. Effective abstracts are concise, specific, and highlight the most critical aspects of the project, often within a word limit of 10 words.
+
+
+Abstract should be in one paragraph, Font: Times New Roman and size should be 12.    
+TABLE OF CONTENTS  
+
+
+ACKNOWLEDGEMENT
+i
+
+
+ABSTRACT
+ii
+
+
+1
+INTRODUCTION	
+
+
+1.1
+Overview of Mlops
+1
+
+1.2
+Problem Statement
+2
+
+1.3
+Objectives
+3
+
+1.4
+Methodology
+4
+
+
+
+
+2
+MODELS USED
+
+
+2.1
+Model 1
+5
+
+2.2
+Model 2
+6
+
+2.3
+Model 3
+7
+
+2.4
+Model 4
+8
+
+2.5
+Model 5
+
+
+
+
+
+3
+IMPLEMENTATION	
+				
+
+
+3.1
+Pipeline Design (Diagram To Be Added)
+
+9
+
+
+3.1.1 Data Collection(Data Set Source Description)
+
+10
+
+
+3.1.2 Data Analysis(Description)
+
+11
+
+
+3.1.3 Training And Testing The Model(Description)
+
+12
+
+
+3.1.4 Deployment Of The Model(Description)
+
+13
+
+3.2
+Performance comparision of Models Used
+14
+
+
+
+
+4
+RESULTS
+15
+
+
+
+
+5
+CONCLUSION
+16
+
+
+1 INTRODUCTION	
+1.1	Overview Of Mlops	
+1.2	Problem Statement	
+1.3	Objectives	
+	1.4	Methodology	
+
+NOTE: REPORT SHOULD HAVE A MINIMUM OF 20 PAGES
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+
+
+2 MODEL SELECTION 
+Reasons for particular model selection 
+Atleast five different models to be used
+2.1 Description, Adavantages, Disadvantages of The Model
+2.2 Description, Adavantages, Disadvantages of The Model
+2.3 Description, Adavantages, Disadvantages of The Model
+2.4 Description, Adavantages, Disadvantages of The Model
+2.5 Description, Adavantages, Disadvantages of The Model
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+3 IMPLEMENTATION	
+3.1	Pipeline Design (Diagram To Be Added)
+	3.1.1 Data Collection (Data Set Source Description)
+	3.1.2 Data Analysis (Description)
+	3.1.3 Training And Testing The Model (Description)
+	3.1.4 Deployment Of The Model (Description)
+3.2	Performance Comparision Of Models Used
+
+Model
+Precision
+Recall
+F1 score
+Accuracy
+Model1
+
+
+
+
+Model2
+
+
+
+
+Model3
+
+
+
+
+Model4
+
+
+
+
+Model5
+
+
+
+
+
+
+
+
+
+4 RESULTS
+INCLUDE INDIVIDUAL MODEL PERFORMANCE GRAPHS 
+COLLAGE OF ALL MODELS PERFORMANCE GRAPHS 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5 CONCLUSION 
+DESCRIPTION OF WHY A PARTICULAR MODEL IS BETTER COMPARED TO OTHER MODELS 
+
