@@ -1,4 +1,4 @@
-# 🧠 Sentira Pro — Sentiment Intelligence Dashboard
+# 🔮 VibeCheck — Sentiment Intelligence Dashboard
 
 A real-time sentiment analysis application powered by a **Voting Ensemble** (LinearSVC + Logistic Regression + Random Forest) with **TextBlob NLP** polarity as a hybrid tiebreaker.
 
@@ -57,8 +57,8 @@ Sentiment_Analyzer/
 
 ```bash
 # Clone the repo
-git clone https://github.com/<your-username>/Sentiment_Analyzer.git
-cd Sentiment_Analyzer
+git clone https://github.com/vishunurdsce/VibeCheck.git
+cd VibeCheck
 
 # Create virtual env (optional)
 python3 -m venv venv && source venv/bin/activate
@@ -80,7 +80,7 @@ streamlit run src/app.py
 1. Push this repo to **GitHub** (public or private).
 2. Go to [share.streamlit.io](https://share.streamlit.io) and sign in with GitHub.
 3. Click **"New app"** and select:
-   - **Repository:** `<your-username>/Sentiment_Analyzer`
+   - **Repository:** `vishunurdsce/VibeCheck`
    - **Branch:** `main`
    - **Main file path:** `src/app.py`
 4. Click **Deploy** — your app will be live in ~2 minutes!
