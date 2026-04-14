@@ -75,6 +75,28 @@ streamlit run src/app.py
 
 ---
 
+## 🐋 Docker & Containerization (MLOps standard)
+
+To run the entire app and environment via a fully isolated, production-grade Linux container:
+
+```bash
+# 1. Build and launch the container securely via Docker Compose
+docker-compose up --build
+```
+> The dashboard will instantly be available via `http://localhost:8501`.
+
+---
+
+## ⚙️ Continuous Integration (GitHub Actions)
+
+This repository includes a production-ready CI pipeline (`.github/workflows/ci.yml`). Upon every push to `main`, an Ubuntu virtual machine will:
+1. Initialize the Python ecosystem.
+2. Formally scan syntax standardizations leveraging `flake8`.
+3. Assure deterministic pipeline validity by test-running the training algorithms (`src/main.py`).
+4. Trigger the internal Linux Docker build process to ensure immutable and error-free API images.
+
+---
+
 ## ☁️ Deploy to Streamlit Cloud
 
 1. Push this repo to **GitHub** (public or private).
