@@ -2,8 +2,12 @@ import streamlit as st
 import joblib
 import os
 import time
-import mlflow
-import mlflow.sklearn
+try:
+    import mlflow
+    import mlflow.sklearn
+    HAS_MLFLOW = True
+except ImportError:
+    HAS_MLFLOW = False
 
 try:
     from textblob import TextBlob
@@ -429,6 +433,9 @@ def load_models(source="local"):
         vec = joblib.load(os.path.join(MODELS_DIR, 'tfidf_vectorizer.pkl'))
         
         if source == "MLflow (Registry)":
+            if not HAS_MLFLOW:
+                st.error("MLflow library is not installed in this environment.")
+                return vec, None
             # CD Flow: Load the model from the Registry
             model_uri = "models:/VibeCheck_Production_Model/latest"
             model = mlflow.sklearn.load_model(model_uri)
