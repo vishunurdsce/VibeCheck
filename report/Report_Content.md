@@ -2,6 +2,14 @@
 
 *(Note: The text below has been significantly expanded with academic depth, theoretical background, and detailed analysis. When pasted into Microsoft Word with 1.5 line spacing, 12pt Times New Roman font, and with all the requested diagrams/images inserted, this content will easily span 15-18 pages.)*
 
+## ABSTRACT
+
+In the era of big data, the ability to systematically interpret human emotion from unstructured textual data has become a critical requirement for organizations seeking real-time consumer insights. This project details the design, implementation, and deployment of a robust Machine Learning Operations (MLOps) pipeline for automated Sentiment Analysis. Utilizing a comprehensive dataset featuring over 30 granular micro-emotions, we engineered a preprocessing architecture that aggregates these into three macro-sentiment categories: Positive, Negative, and Neutral. The pipeline utilizes Term Frequency-Inverse Document Frequency (TF-IDF) vectorization with unigram and bigram configurations to capture semantic nuances across 6,000 feature dimensions.
+
+A comparative empirical study was conducted across five distinct machine learning paradigms: Logistic Regression, Multinomial Naive Bayes, Linear Support Vector Classification (SVC), Random Forest, and Decision Trees. Evaluation metrics—including Precision, Recall, and F1-Score—revealed that linear methodologies, specifically Linear SVC, significantly outperformed non-linear tree-based models, which struggled with the high-dimensional sparsity of the textual feature space. To further enhance predictive stability and mitigate individual algorithmic biases, a Voting Ensemble architecture was developed, aggregating the strengths of the top-performing classifiers. The finalized system was serialized and deployed via a Streamlit-based graphical user interface (GUI), providing a seamless, real-time inference environment for end-users. This project demonstrates that the integration of rigorous NLP preprocessing with synchronized ensemble learning offers a scalable and reliable solution for linguistic intelligence extraction.
+
+---
+
 ## 1 INTRODUCTION
 
 ### 1.1 Overview Of Mlops
@@ -112,8 +120,35 @@ We included linear models (Logistic Regression, Linear SVC) because they are his
 
 ## 3 IMPLEMENTATION
 
-### 3.1 Pipeline Design 
-*(Note: Insert the block diagram or flowchart of your MLOps pipeline here. Ensure the diagram illustrates the sequential flow: Raw Data CSV -> Preprocessing/Bucketing script -> TFIDF Vectorizer -> Model Training algorithms -> Result Metrics Evaluation -> Model Pickle Serialization -> Streamlit App UI)*
+```mermaid
+graph TD
+    A[Raw Data: sentimentdataset.csv] --> B[Data Ingestion & Cleaning]
+    B --> C[Label Bucketing: 30+ Emotions to Pos/Neg/Neu]
+    C --> D[Text Normalization & Standardisation]
+    D --> E[TF-IDF Vectorization: Unigrams + Bigrams]
+    E --> F[Stratified 80-20 Train/Test Split]
+    
+    subgraph "Model Training & Evaluation"
+        F --> G1[Logistic Regression]
+        F --> G2[Naive Bayes]
+        F --> G3[Linear SVC]
+        F --> G4[Random Forest]
+        F --> G5[Decision Tree]
+        
+        G1 & G2 & G3 & G4 & G5 --> H[Performance Metrics & Confusion Matrices]
+    end
+    
+    H --> I[Model Selection: Linear SVC + LR + RF]
+    I --> J[Voting Ensemble Classifier]
+    J --> K[Model Serialization: .pkl files]
+    
+    K --> L[Streamlit Cloud Deployment]
+    L --> M[Real-time Inference GUI]
+```
+
+![Sentiment Analysis Pipeline Diagram](../results/pipeline_diagram.png)
+
+**Figure 1: End-to-End MLOps Pipeline Design.** The visuals above illustrate the systematic progression from raw data ingestion to real-time model serving. The professional diagram highlights the core phases: Data Processing (TF-IDF), Model Training (Linear SVC, Logistic Regression, Random Forest), and the final Deployment through a Voting Ensemble on Streamlit.
 
 The pipeline design for this MLOps architecture has been carefully structured to isolate data preprocessing, complex model training logic, and user-facing web deployment. The design is modular, meaning the data pipeline can be modified without needing to rewrite the dashboard frontend, maintaining standard engineering loosely coupled constraints.
 
@@ -150,27 +185,41 @@ Analyzing the performance matrix clearly demonstrates the profound superiority o
 
 *(Note: In your Word document, distribute the following images carefully so they stretch over several pages. Include a descriptive paragraph below EACH image.)*
 
+**ADVANCED PERFORMANCE VISUALIZATION: RADAR CHARTS & TRADE-OFFS**
+
+![Performance Radar Chart](../results/performance_radar_chart.png)
+**Figure 2: Model Performance Radar Chart.** This visualization provides a holistic view of how each model balances the four key metrics: Precision, Recall, F1 Score, and Accuracy. The larger the area covered by the model's polygon, the more robust its overall performance. We can clearly observe that **Linear SVC** (green) and **Logistic Regression** (blue) occupy the largest surface area, indicating superior balance across all semantic evaluation criteria.
+
+![Precision-Recall Trade-off](../results/precision_recall_tradeoff.png)
+**Figure 3: Precision vs. Recall Trade-off Analysis.** This scatter plot maps the equilibrium between Precision (vertical axis) and Recall (horizontal axis). In sentiment analysis, a high precision reduces false positives (mislabeling neutral as positive), while high recall reduces false negatives (missing angry comments). The top-right quadrant represents the "Gold Standard" of performance. Both Linear SVC and Logistic Regression are positioned significantly higher and further right than tree-based models, verifying their reliability for production deployment.
+
 **INDIVIDUAL MODEL PERFORMANCE GRAPHS: CONFUSION MATRICES**
 
-*Insert `cm_Logistic_Regression.png` here*
-**Figure 1: Logistic Regression Confusion Matrix.** This matrix visually illustrates the classification distribution. We can observe high values down the central diagonal, representing true accuracy. The heat-mapping colors denote concentration densities, showcasing Logistic Regression's strong capability at distinctly isolating Positive from Negative contexts with limited mid-range spillage. 
+![Logistic Regression Confusion Matrix](../results/cm_Logistic_Regression.png)
+**Figure 2: Logistic Regression Confusion Matrix.** This matrix visually illustrates the classification distribution. We can observe high values down the central diagonal, representing true accuracy. The heat-mapping colors denote concentration densities, showcasing Logistic Regression's strong capability at distinctly isolating Positive from Negative contexts with limited mid-range spillage. 
 
-*Insert `cm_Naive_Bayes.png` here*
-**Figure 2: Multinomial Naive Bayes Confusion Matrix.** Here we can visualize the impact of the algorithm's probabilistic feature-independence assumptions. While it establishes a reasonable baseline, the off-diagonal cells reveal a slightly elevated rate of false classifications compared to its linear constraints counterparts, especially concerning complex ambiguous phrases.
+![Naive Bayes Confusion Matrix](../results/cm_Naive_Bayes.png)
+**Figure 3: Multinomial Naive Bayes Confusion Matrix.** Here we can visualize the impact of the algorithm's probabilistic feature-independence assumptions. While it establishes a reasonable baseline, the off-diagonal cells reveal a slightly elevated rate of false classifications compared to its linear constraints counterparts, especially concerning complex ambiguous phrases.
 
-*Insert `cm_Linear_SVC.png` here*
-**Figure 3: Linear SVC Confusion Matrix.** This visualization verifies Linear SVC as the supreme individual algorithm. The exceptionally dark blue concentrations spanning strictly upon the True Positive matching diagonal explicitly demonstrate the successful execution of its large-margin optimization parameters over the sparse textual mapping.
+![Linear SVC Confusion Matrix](../results/cm_Linear_SVC.png)
+**Figure 4: Linear SVC Confusion Matrix.** This visualization verifies Linear SVC as the supreme individual algorithm. The exceptionally dark blue concentrations spanning strictly upon the True Positive matching diagonal explicitly demonstrate the successful execution of its large-margin optimization parameters over the sparse textual mapping.
 
-*Insert `cm_Random_Forest.png` here*
-**Figure 4: Random Forest Confusion Matrix.** While the Random Forest effectively managed to drastically reduce the variance issues of single trees, the matrix highlights its intrinsic struggles with precision-recall trade-offs when navigating vast arrays of high-dimensional zeros typical in our sparse textual vector configurations.
+![Random Forest Confusion Matrix](../results/cm_Random_Forest.png)
+**Figure 5: Random Forest Confusion Matrix.** While the Random Forest effectively managed to drastically reduce the variance issues of single trees, the matrix highlights its intrinsic struggles with precision-recall trade-offs when navigating vast arrays of high-dimensional zeros typical in our sparse textual vector configurations.
 
-*Insert `cm_Decision_Tree.png` here*
-**Figure 5: Decision Tree Confusion Matrix.** This visualization starkly represents severe overfitting consequences. The extensive dispersion of values outside the central diagonal confirms that the strict Boolean mapping failed disastrously on text it had not explicitly memorized during training, generating extensive misclassifications.
+![Decision Tree Confusion Matrix](../results/cm_Decision_Tree.png)
+**Figure 6: Decision Tree Confusion Matrix.** This visualization starkly represents severe overfitting consequences. The extensive dispersion of values outside the central diagonal confirms that the strict Boolean mapping failed disastrously on text it had not explicitly memorized during training, generating extensive misclassifications.
 
-**COLLAGE OF ALL MODELS PERFORMANCE GRAPHS**
+**OVERALL SYSTEM PERFORMANCE & COMPARISON**
 
-*Insert `model_comparison.png` here*
-**Figure 6: Aggregate Performance Bar Chart.** This comprehensive collage graph summarizes the overarching investigation. It visually aligns the F1 scores alongside total Accuracy and Precision metrics across all algorithms. The disparities are readily apparent, conclusively verifying the structural advantages inherent in linear classification methodologies concerning Natural Language Processing operations.
+![Model Performance Comparison](../results/model_comparison.png)
+**Figure 7: Aggregate Performance Bar Chart.** This comprehensive collage graph summarizes the overarching investigation. It visually aligns the F1 scores alongside total Accuracy and Precision metrics across all algorithms. The disparities are readily apparent, conclusively verifying the structural advantages inherent in linear classification methodologies concerning Natural Language Processing operations.
+
+![Confusion Matrices Collage](../results/confusion_matrices_collage.png)
+**Figure 8: Performance Collage - Confusion Matrices.** A side-by-side comparison of the classification behavior for all models. This collage allows for rapid identification of how each algorithm handles class-specific misclassifications, highlighting the consistent performance of the Linear SVC and Logistic Regression models compared to the sparse-feature struggles of tree-based models.
+
+![Sentiment Analysis Dashboard Mockup](../results/dashboard_mockup.png)
+**Figure 9: Deployed Sentiment Intelligence Dashboard.** A high-fidelity mockup of the final Streamlit deployment. The interface provides real-time sentiment scoring, confidence visualization, and categorical distribution charts, enabling end-users to interact with the Voting Ensemble model through an aesthetic, professional analytical environment.
 
 ---
 

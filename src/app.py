@@ -2,6 +2,8 @@ import streamlit as st
 import joblib
 import os
 import time
+import mlflow
+import mlflow.sklearn
 
 try:
     from textblob import TextBlob
@@ -16,7 +18,8 @@ MODELS_DIR = os.path.join(ROOT_DIR, 'models')
 st.set_page_config(
     page_title="VibeCheck | Sentiment Intelligence",
     page_icon="🔮",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
 # ── Inject premium CSS ──────────────────────────────────────────────────────
@@ -410,7 +413,6 @@ section[data-testid="stSidebar"] .stMarkdown h1 {
 /* Remove Streamlit branding */
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
-header {visibility: hidden;}
 </style>
 """, unsafe_allow_html=True)
 
@@ -421,12 +423,20 @@ if 'history' not in st.session_state:
 
 
 @st.cache_resource
-def load_models():
+def load_models(source="local"):
     try:
-        vec   = joblib.load(os.path.join(MODELS_DIR, 'tfidf_vectorizer.pkl'))
-        model = joblib.load(os.path.join(MODELS_DIR, 'best_sentiment_model.pkl'))
+        # Vectorizer is usually static unless features change
+        vec = joblib.load(os.path.join(MODELS_DIR, 'tfidf_vectorizer.pkl'))
+        
+        if source == "MLflow (Registry)":
+            # CD Flow: Load the model from the Registry
+            model_uri = "models:/VibeCheck_Production_Model/latest"
+            model = mlflow.sklearn.load_model(model_uri)
+        else:
+            model = joblib.load(os.path.join(MODELS_DIR, 'best_sentiment_model.pkl'))
+            
         return vec, model
-    except Exception:
+    except Exception as e:
         return None, None
 
 
@@ -535,6 +545,17 @@ def main():
             <span class="sidebar-tag tag-ens">Hybrid</span>
         </div>
         """, unsafe_allow_html=True)
+        
+        st.divider()
+
+        st.markdown('<div style="font-size: 0.65rem; letter-spacing: 2px; color: #475569; text-transform: uppercase; font-weight: 600; margin-bottom: 10px;">Deployment Source</div>', unsafe_allow_html=True)
+        model_source = st.radio(
+            "Select Model Source",
+            ["Local Storage", "MLflow (Registry)"],
+            label_visibility="collapsed",
+            help="CD Simulation: 'Local' uses the locally saved model. 'MLflow' pulls the latest version from the Model Registry."
+        )
+
         st.divider()
 
         st.markdown("""
@@ -577,10 +598,13 @@ def main():
         label_visibility="collapsed"
     )
 
-    vec, model = load_models()
+    vec, model = load_models(model_source)
 
     if not vec or not model:
-        st.error("⚠️  Models not found. Run `python3 src/main.py` first.")
+        if model_source == "MLflow (Registry)":
+            st.warning("⚠️  No model found in MLflow Registry. Run the training pipeline first.")
+        else:
+            st.error("⚠️  Local model not found. Run `python3 src/main.py` first.")
         return
 
     if user_input.strip():
