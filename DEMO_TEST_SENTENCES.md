@@ -1,7 +1,19 @@
-# 🧪 Sentira Pro — Demo Test Sentences
+# 🔮 VibeCheck — Demo Test Sentences
 
-> These are **social media post-style** sentences similar to the training data.
-> Copy-paste any of these into the app for a reliable demo.
+> These are **social media post-style** sentences.
+> **VIVA TIP:** Start your demo with the "Golden" sentences to make the dashboard stats light up perfectly. Then show the regular dataset sentences to explain your hybrid model.
+
+---
+
+## ⭐ GOLDEN DEMO SENTENCES (Guaranteed to light up the dashboard!)
+
+| # | Type | Test Sentence |
+|---|------|---------------|
+| 1 | Positive | The absolutely wonderful and amazing design of this application is fantastic! |
+| 2 | Positive | I am so incredibly happy and delighted with this perfect result. |
+| 3 | Negative | This is incredibly terrible, awful, and the worst thing I have ever seen. |
+| 4 | Negative | I am deeply sad and disgusted by this horrible mistake. |
+| 5 | Hybrid Test | Can't believe the injustice happening in our society. *(Use this to show ML catching what TextBlob misses)* |
 
 ---
 

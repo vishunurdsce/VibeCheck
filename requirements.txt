@@ -6,3 +6,4 @@ streamlit
 joblib
 textblob
 tabulate
+mlflow
