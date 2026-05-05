@@ -1,0 +1,29 @@
+artifact_path: /Users/jayashreem/Vishunu/clg/dsu/s6/mlops/Sentiment_Analyzer/mlruns/1/models/m-2888e6e90d0f463cac2f82751663cdcb/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.12.6
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.3.2
+    skops_trusted_types: null
+is_signature_from_type_hint: false
+mlflow_version: 3.11.1
+model_id: m-2888e6e90d0f463cac2f82751663cdcb
+model_size_bytes: 5503
+model_uuid: m-2888e6e90d0f463cac2f82751663cdcb
+prompts: null
+run_id: 6be39ee0ff2e49f0bddeb8052865cfa7
+signature:
+  inputs: '[{"type": "tensor", "tensor-spec": {"dtype": "float64", "shape": [-1, 6000]}}]'
+  outputs: '[{"type": "string", "name": "Sentiment", "required": true}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2026-05-05 01:14:27.308873'
