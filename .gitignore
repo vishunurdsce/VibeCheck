@@ -29,3 +29,5 @@ VIVA_PREP_GUIDE.txt
 DEMO_TEST_SENTENCES.md
 random.md
 random.txt
+mlflow.db
+mlruns/
